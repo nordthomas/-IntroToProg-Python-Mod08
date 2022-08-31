@@ -160,14 +160,24 @@ class IO:
 
         return name, price
 
+    @staticmethod
+    def create_file(file, filename):
+        """  Create empty file on disk
+
+        :param file: (object) file handle:
+        :param filename: (string) name of file on disk:
+        :return: nothing
+        """
+        if file == None:
+            file = open(filename, "a")
+            file.close()
+
 # Presentation (Input/Output)  -------------------------------------------- #
 
 # Main Body of Script  ---------------------------------------------------- #
 
 # When the program starts, if there is no file on disk, create one
-if objFile == None:
-    objFile = open(strFileName, "a")
-    objFile.close()
+IO.create_file(objFile, strFileName)
 
 # Load data from file into a list of product objects when script starts
 FileProcessor.read_data_from_file(file_name=strFileName, list_of_rows=lstOfProductObjects)  # read file data
