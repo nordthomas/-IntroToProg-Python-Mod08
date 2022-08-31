@@ -13,7 +13,7 @@ strFileName = 'products.txt'
 objFile = None
 lstOfProductObjects = []
 
-class Product(object):
+class Product:
     """Stores data about a product:
 
     properties:
@@ -58,9 +58,7 @@ class FileProcessor:
     """Processes data to and from a file and a list of product objects:
 
     methods:
-
         read_data_from_file(file_name): -> (a list of product objects)
-
         save_data_to_file(file_name, list_of_product_objects):
 
     changelog: (When,Who,What)
@@ -106,11 +104,8 @@ class IO:
 
         methods:
             output_menu_tasks():
-
             input_menu_choice(): -> (string)
-
             show_current_data(list_of_rows):
-
             get_data_from_user(): -> (string),(float)
 
         changelog: (When,Who,What)
@@ -181,23 +176,23 @@ FileProcessor.read_data_from_file(file_name=strFileName, list_of_rows=lstOfProdu
 while (True):
     # Step 3 Show current data
     IO.output_menu_tasks()  # Shows menu
-    str_choice = IO.input_menu_choice()  # Get user's menu option choice
+    strchoice = IO.input_menu_choice()  # Get user's menu option choice
 
-    if str_choice.strip() == '1':  # Show Current Data (Product Objects)
+    if strchoice.strip() == '1':  # Show Current Data (Product Objects)
         IO.show_current_data(lstOfProductObjects)
         continue  # to show the menu
 
-    elif str_choice == '2':  # Add New Product to List of Product Objects
+    elif strchoice == '2':  # Add New Product to List of Product Objects
         objprod = Product()
         objprod.product_name, objprod.product_price = IO.get_data_from_user()
         lstOfProductObjects.append(objprod)
         continue  # to show the menu
 
-    elif str_choice == '3':  # Save Current Data to File
+    elif strchoice == '3':  # Save Current Data to File
         FileProcessor.save_data_to_file(file_name=strFileName, list_of_rows=lstOfProductObjects)
         continue  # to show the menu
 
-    elif str_choice == '4':  # Exit Program
+    elif strchoice == '4':  # Exit Program
         print("Goodbye!")
         break  # by exiting loop
 
