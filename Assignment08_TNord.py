@@ -104,10 +104,10 @@ class FileProcessor:
         :param list_of_rows: (list) containing your data:
         :return: (list) of objects
         """
-        objFile = open(file_name, "w")
+        file = open(file_name, "w")
         for row in list_of_rows:
-            objFile.write(str(row).strip() + "\n") # calls __str__()
-        objFile.close()
+            file.write(str(row).strip() + "\n") # calls __str__()
+        file.close()
         print("Data saved to file!")
         return list_of_rows
 
