@@ -209,4 +209,8 @@ while (True):
         print("Goodbye!")
         break  # by exiting loop
 
+    else:
+        print("Please enter a valid choice.")
+        continue
+
 # Main Body of Script  ---------------------------------------------------- #
