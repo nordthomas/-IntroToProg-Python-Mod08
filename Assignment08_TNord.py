@@ -24,6 +24,8 @@ class Product:
         RRoot,1.1.2030,Created Class
         TNord,8.30.2022,Modified code to complete assignment 8
     """
+    product_name = ""
+    product_price = 0
 
     def __init__(self, product_name = "", product_price = 0):
         self.product_name = product_name
@@ -58,6 +60,7 @@ class FileProcessor:
     """Processes data to and from a file and a list of product objects:
 
     methods:
+        create_file(file, file_name):
         read_data_from_file(file_name): -> (a list of product objects)
         save_data_to_file(file_name, list_of_product_objects):
 
@@ -65,6 +68,18 @@ class FileProcessor:
         RRoot,1.1.2030,Created Class
         TNord,8.30.2022,Modified code to complete assignment 8
     """
+
+    @staticmethod
+    def create_file(file, file_name):
+        """  Create empty file on disk
+
+        :param file: (object) file handle:
+        :param file_name: (string) name of file on disk:
+        :return: nothing
+        """
+        if file == None:
+            file = open(file_name, "a")
+            file.close()
 
     @staticmethod
     def read_data_from_file(file_name, list_of_rows):
@@ -160,24 +175,12 @@ class IO:
 
         return name, price
 
-    @staticmethod
-    def create_file(file, filename):
-        """  Create empty file on disk
-
-        :param file: (object) file handle:
-        :param filename: (string) name of file on disk:
-        :return: nothing
-        """
-        if file == None:
-            file = open(filename, "a")
-            file.close()
-
 # Presentation (Input/Output)  -------------------------------------------- #
 
 # Main Body of Script  ---------------------------------------------------- #
 
 # When the program starts, if there is no file on disk, create one
-IO.create_file(objFile, strFileName)
+FileProcessor.create_file(objFile, strFileName)
 
 # Load data from file into a list of product objects when script starts
 FileProcessor.read_data_from_file(file_name=strFileName, list_of_rows=lstOfProductObjects)  # read file data
@@ -207,4 +210,3 @@ while (True):
         break  # by exiting loop
 
 # Main Body of Script  ---------------------------------------------------- #
-
