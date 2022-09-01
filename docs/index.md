@@ -1,8 +1,8 @@
-Thomas Nord
-08-30-2022
-Foundations of Programming (Python)
-Recap of Module 08 – Objects and Classes
-[https://github.com/nordthomas/IntroToProg-Python-Mod08](https://github.com/nordthomas/IntroToProg-Python-Mod08)
+Thomas Nord  
+08-30-2022  
+Foundations of Programming (Python)  
+Recap of Module 08 – Objects and Classes  
+[https://github.com/nordthomas/IntroToProg-Python-Mod08](https://github.com/nordthomas/IntroToProg-Python-Mod08)  
 
 # Creating an Inventory Program
 
@@ -21,8 +21,8 @@ The first thing I want to do is update my script header to track my work in the 
 I know I’ll need to write some methods but I don’t know what they’ll be yet so I just add a section for them and leave it blank for now. 
 The last thing I added before digging into the code was a new variable. We started with:
 
-  strFileName = 'products.txt'
-  lstOfProductObjects = []
+ strFileName = 'products.txt'
+ lstOfProductObjects = []
 
 However, when working with files I know we’ll need not only a string for our file name, but also a file handle so I created the `objFile` variable for that and set it to `None`. 
 
@@ -30,29 +30,29 @@ However, when working with files I know we’ll need not only a string for our f
 ### Fields
 First on our `TODO` list is dealing with the contents of the `Product` class. We do not have any methods to start with so we’ll have to look at what we might need. Our docstring tells us that we need 2 properties: 
 
-  properties:
-      product_name: (string) with the product's name
-      product_price: (float) with the product's price
+ properties:
+  product_name: (string) with the product's name
+  product_price: (float) with the product's price
     
 So, we need to build an object that receives a name and a price. We’ll start by adding 2 fields and setting some default values. 
 
-  product_name = ""
-  product_price = 0
+ product_name = ""
+ product_price = 0
 
 ### Constructor
 Now that we have a couple fields to hold the data we want the object to encapsulate we can start writing our methods. A good place to start is with our initialization constructor, which will automatically run whenever we create our object. 
 
-  def __init__(self, product_name = "", product_price = 0):
-      self.product_name = product_name
-      self.product_price = product_price
+ def __init__(self, product_name = "", product_price = 0):
+  self.product_name = product_name
+  self.product_price = product_price
     
 This constructor is a method with 2 underscores before and after the word “init”, followed by our parameters which, in this case, are the keyword `self` followed by the two fields we set earlier. Because we want to be able to access the fields from within the class we need to use that self parameter at the beginning of our variables within the method. So we set a variable called `self.product_nam`e and assign it our `product_name` parameter. Then we do the same for `product_price`. 
 
 ### The __str__() Method
 Because we’re going to be working with objects containing string data, it’s a good idea to create a new `string` method which will replace the built-in one. This will ensure that when we print the object we’ll get something more human-readable and formatted to our needs. Like the constructor, we use the double underscore (“duder”) in the method name: 
 
-  def __str__(self):
-      return self.product_name + " | " + self.product_price
+ def __str__(self):
+  return self.product_name + " | " + self.product_price
     
 The `return` statement is set up to give us the name of our product and the price of the product separated by a pipe (|). This will make the data that we inject to our file later easier to read. 
 
