@@ -180,7 +180,7 @@ class IO:
 # Main Body of Script  ---------------------------------------------------- #
 
 # When the program starts, if there is no file on disk, create one
-FileProcessor.create_file(objFile, strFileName)
+FileProcessor.create_file(file=objFile, file_name=strFileName)
 
 # Load data from file into a list of product objects when script starts
 FileProcessor.read_data_from_file(file_name=strFileName, list_of_rows=lstOfProductObjects)  # read file data
@@ -192,7 +192,7 @@ while (True):
     strchoice = IO.input_menu_choice()  # Get user's menu option choice
 
     if strchoice.strip() == '1':  # Show Current Data (Product Objects)
-        IO.show_current_data(lstOfProductObjects)
+        IO.show_current_data(list_of_rows=lstOfProductObjects)
         continue  # to show the menu
 
     elif strchoice == '2':  # Add New Product to List of Product Objects
