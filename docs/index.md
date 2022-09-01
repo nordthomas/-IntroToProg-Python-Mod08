@@ -98,35 +98,35 @@ Here we’re creating an object instance of the `Product` class and assigning it
 ## Writing to the File
 The `FileProcessor` method docstring tells us we have at least 2 methods to write but I have added a third. Over the course of this class I have been using a function to check if the file we want to write to exists and if it doesn’t then I create it. 
 
-  @staticmethod
-  def create_file(file, file_name):
-      """  Create empty file on disk
-  
-       :param file: (object) file handle:
-      :param file_name: (string) name of file on disk:
-      :return: nothing
-      """
-      if file == None:
-          file = open(file_name, "a")
-          file.close()
+    @staticmethod
+    def create_file(file, file_name):
+        """  Create empty file on disk
+        
+        :param file: (object) file handle:
+        :param file_name: (string) name of file on disk:
+        :return: nothing
+        """
+        if file == None:
+            file = open(file_name, "a")
+            file.close()
           
 Now, I no longer need to create the file manually which is a huge timesaver when testing. And don’t forget to also add this method to your docstring!
 The next method we need is one to read data from the file on disk (`read_data_from_file`). This basically like any other function we’ve used to read data from a file so I used the code from Assignment 6 and updated the parameter names. 
 
-  @staticmethod
-  def read_data_from_file(file_name, list_of_rows):
-      """ Reads data from a file into a list
-  
-      :param file_name: (string) with name of file:
-      :param list_of_rows: (list) you want filled with file data:
-      :return: (list) of rows
-      """
-      list_of_rows.clear()  # clear current data
-      file = open(file_name, "r")
-      for row in file:
-          list_of_rows.append(row)
-      file.close()
-      return list_of_rows
+    @staticmethod
+    def read_data_from_file(file_name, list_of_rows):
+        """ Reads data from a file into a list
+        
+        :param file_name: (string) with name of file:
+        :param list_of_rows: (list) you want filled with file data:
+        :return: (list) of rows
+        """
+        list_of_rows.clear()  # clear current data
+        file = open(file_name, "r")
+        for row in file:
+            list_of_rows.append(row)
+        file.close()
+        return list_of_rows
       
 The method to write the data to our file is also very similar to the one used in Assignment 6 but with one important change. When we write the data, by default it will use the built-in __str__ method for our class and that would result in an error since the write method requires a string (Figure 3). 
  
@@ -136,122 +136,122 @@ The method to write the data to our file is also very similar to the one used in
 
 To solve this we need to convert the data to a string which will then invoke our custom `__str__` method and provide the user with human readable data. 
 
-  @staticmethod
-  def save_data_to_file(file_name, list_of_rows):
-      """ Writes data from a list of object rows to a File
-  
-      :param file_name: (string) with name of file:
-      :param list_of_rows: (list) containing your data:
-      :return: (list) of objects
-      """
-      file = open(file_name, "w")
-      for row in list_of_rows:
-          file.write(str(row).strip() + "\n") # calls __str__()
-      file.close()
-      print("Data saved to file!")
-      return list_of_rows
+    @staticmethod
+    def save_data_to_file(file_name, list_of_rows):
+        """ Writes data from a list of object rows to a File
+        
+        :param file_name: (string) with name of file:
+        :param list_of_rows: (list) containing your data:
+        :return: (list) of objects
+        """
+        file = open(file_name, "w")
+        for row in list_of_rows:
+            file.write(str(row).strip() + "\n") # calls __str__()
+        file.close()
+        print("Data saved to file!")
+        return list_of_rows
 
 ## The IO Class
 The `IO` class is going to look very familiar as we did something very similar in Assignment 6 a couple weeks ago. I started by copying the functions for generating our menu and capturing the user’s choice and updating them with the information relevant to this assignment. 
 
-  @staticmethod
-  def output_menu_tasks():
-      """  Display a menu of choices to the user
-  
-      :return: nothing
-      """
-      print('''
-      Menu of Options
-      1) Show Current Products
-      2) Add New Product
-      3) Save Data to File        
-      4) Exit Program
-      ''')
-      print()  # Add an extra line for looks
-
-  @staticmethod
-  def input_menu_choice():
-      """ Gets the menu choice from a user
-  
-      :return: (string) of user's menu choice
-      """
-      choice = str(input("Which option would you like to perform? [1 to 4]: ")).strip()
-      print()  # Add an extra line for looks
-      return choice
+    @staticmethod
+    def output_menu_tasks():
+        """  Display a menu of choices to the user
+        
+        :return: nothing
+        """
+        print('''
+        Menu of Options
+        1) Show Current Products
+        2) Add New Product
+        3) Save Data to File        
+        4) Exit Program
+        ''')
+        print()  # Add an extra line for looks
+        
+    @staticmethod
+    def input_menu_choice():
+        """ Gets the menu choice from a user
+        
+        :return: (string) of user's menu choice
+        """
+        choice = str(input("Which option would you like to perform? [1 to 4]: ")).strip()
+        print()  # Add an extra line for looks
+        return choice
       
 The next method we needed according to the list of `TODO`s in the start script was something that presented the user with a list of the current data. This would include any data from the existing file that we read and any new data entered by the user. As our script will capture all of that data in to a single list which we have already declared (`lstOfProductObjects`) we just need to pass in that single argument and use a `for` loop to print out the data. I also added a little formatting to make the list look a little nicer. 
 
-  @staticmethod
-  def show_current_data(list_of_rows):
-      """  Shows current list of products
-  
-      :param list_of_rows: (list) of current products:
-      :return: nothing
-      """
-      print("******* The current Products are: *******")
-      for row in list_of_rows:
-          print(str(row).strip())
-      print("*******************************************")
+    @staticmethod
+    def show_current_data(list_of_rows):
+        """  Shows current list of products
+        
+        :param list_of_rows: (list) of current products:
+        :return: nothing
+        """
+        print("******* The current Products are: *******")
+        for row in list_of_rows:
+            print(str(row).strip())
+        print("*******************************************")
       
 You’ll note that again, we converted our list of objects to a list of strings for the purposes of readability. 
 Now that we have all our methods, don’t forget to update that docstring. 
 
-  """ Performs Input and Output tasks
-  
-      methods:
-          output_menu_tasks():
-          input_menu_choice(): -> (string)
-          show_current_data(list_of_rows):
-          get_data_from_user(): -> (string),(float)
-  
-      changelog: (When,Who,What)
-      TNord,8.30.2022,Modified code to complete assignment 8
-  """
+    """ Performs Input and Output tasks
+    
+        methods:
+            output_menu_tasks():
+            input_menu_choice(): -> (string)
+            show_current_data(list_of_rows):
+            get_data_from_user(): -> (string),(float)
+        
+        changelog: (When,Who,What)
+        TNord,8.30.2022,Modified code to complete assignment 8
+    """
 
 ## The Body of the Script
 Now that we have all of our classes written and functional it is time to start building the main body of our script. Because we spent our time putting all of our logic in to classes and functions this part of the process will pretty quick. 
 
 The first thing I want to do when the program loads is to create a file on disk if there isn’t one already. Creating the file now ensures that we have a file early enough in the logic that any calls we make to the file will not result in errors. As I made a function for creating the file I just need to call it with two arguments, one for the file’s handle and one for the file’s name: 
 
-  FileProcessor.create_file(file=objFile, file_name=strFileName)
+    FileProcessor.create_file(file=objFile, file_name=strFileName)
 
 The next thing we need to do is present the user with a menu and then set a variable to capture their menu choice. We already have functions for both of these so all we need to do is place them inside of a `while` loop to get us started. 
 
-  while (True):
-      IO.output_menu_tasks()
-      strchoice = IO.input_menu_choice()
+    while (True):
+        IO.output_menu_tasks()
+        strchoice = IO.input_menu_choice()
       
 With the menu in place we set up we need to add the logic for the different menu choices. Our first menu option allows the user to see the currently available data. This will be our list of objects (`lstOfProductObjects`) which includes the data from the file on disk and any new objects the user may have added during this session. Once that has been displayed, we return the user to the main menu. 
 
-  if strchoice.strip() == '1':  # Show Current Data (Product Objects)
-      IO.show_current_data(list_of_rows=lstOfProductObjects)
-      continue
+    if strchoice.strip() == '1':  # Show Current Data (Product Objects)
+        IO.show_current_data(list_of_rows=lstOfProductObjects)
+        continue
       
 The second menu option allows the user to add a new product and its price to the current list of objects (`lstOfProductObjects`). In order to do that we need to first create the object which we do by invoking the Product class and assigning it to our variable (`objprod`). While this creates the object instance it doesn’t create the data we want. We need the user to give us the data, so we set some variables and call our `IO.get_data_from_user()` function to gather the data to assign to them. Once we have an object with a product name and price the last piece is to append it to our existing list (`lstOfProductObjects`) and return the user to the main menu. 
 
-  elif strchoice == '2':  # Add New Product to List of Product Objects
-      objprod = Product()
-      objprod.product_name, objprod.product_price = IO.get_data_from_user()
-      lstOfProductObjects.append(objprod)
-      continue  # to show the menu
+    elif strchoice == '2':  # Add New Product to List of Product Objects
+        objprod = Product()
+        objprod.product_name, objprod.product_price = IO.get_data_from_user()
+        lstOfProductObjects.append(objprod)
+        continue  # to show the menu
       
 The third menu option saves the current list of objects (`lstOfProductObjects`) to our file on disk. It takes 2 arguments: the name of the file we want to save to (`strFileName`) and the list of objects that we want to read our data from (`lstOfProductObjects`). 
 
-  elif strchoice == '3':  # Save Current Data to File
-      FileProcessor.save_data_to_file(file_name=strFileName, list_of_rows=lstOfProductObjects)
-      continue
+    elif strchoice == '3':  # Save Current Data to File
+        FileProcessor.save_data_to_file(file_name=strFileName, list_of_rows=lstOfProductObjects)
+        continue
     
 Our 4th menu choice needs to exit the program so we print a goodbye statement and break the loop and exiting the program. 
 
-  elif strchoice == '4':  # Exit Program
-      print("Goodbye!")
-      break
+    elif strchoice == '4':  # Exit Program
+        print("Goodbye!")
+        break
     
 The final part of our script captures any invalid input from the user and reminds them to enter a valid number. 
 
-  else:
-      print("Please enter a valid choice.")
-      continue
+    else:
+        print("Please enter a valid choice.")
+        continue
 
 ## Testing
 With the script complete we need to test it one last time to make sure everything is working as expected. 
